@@ -1,0 +1,25 @@
+
+{% extends "account/base.html" %}
+<html>
+    <head>
+        {% block head %}
+            <title>
+                Login
+            </title>
+        {% endblock %}
+    </head>
+    <body> 
+        {% block body %}
+            <div class="container">
+                <h1>Welcome</h1>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        {% endblock %}
+        
+    </body>
+</html> 

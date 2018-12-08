@@ -1,0 +1,12 @@
+
+{% extends "account/base.html" %}
+{% block body %}
+<br>
+
+<div class="container">
+    <h1>Profile</h1>
+    {{user.first_name}}
+    {{user.last_name}}
+    {{user.email}}
+</div>
+{% endblock %}
