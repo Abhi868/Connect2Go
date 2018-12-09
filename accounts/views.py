@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
-from account.forms import editprofileform
+from accounts.forms import editprofileform
 from  django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 # from django.response import HttpResponse
@@ -11,33 +11,35 @@ def editprofile(request):
         form=editprofileform(request.POST,instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/account/profile')
+            return redirect('/accounts/profile')
     else:
         form=editprofileform(instance=request.user)
         args={'form':form}
-        return render(request,'account/editprofile.html',args)
+        return render(request,'accounts/editprofile.html',args)
 
 def change_password(request):
     if request.method=="POST":
         form=PasswordChangeForm(data=request.POST,user=request.user)
+        print(form)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request,form.user)
-            return redirect('/account/profile')
+            return redirect('/accounts/profile')
+   
     else:
         form=PasswordChangeForm(request.user)
         args={'form':form}
-        return render(request,"account/change_password.html" ,args)
+    return render(request,"accounts/change_password.html" ,args)
 
 
 
 def home(request):
-    return render(request, "account/home.html")
+    return render(request, "accounts/home.html")
 
 def profile(request):
     args={'user':request.user}
-    print(request.user)
-    return render(request,"account/profile.html" ,args)
+    print(request.user.first_name)
+    return render(request,"accounts/profile.html",args)
 
 def register(request):
     if request.method=='POST':
@@ -48,5 +50,4 @@ def register(request):
     else:
         form=UserCreationForm()
         args={'form':form}
-
-        return render(request,"account/register.html",args)
+        return render(request,"accounts/register.html",args)

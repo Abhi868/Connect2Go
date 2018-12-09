@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
+# from django.urls import path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -37,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'SocialConnect.middleware.LoginRequiredMiddleware',
+    # 'SocialConnect.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'SocialConnect.urls'
@@ -115,12 +114,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL="/account/"
-LOGIN_URL="/account/login/"
-
-LOGIN_EXEMPT_URLS=(
-path('account/logout/'),
-path('account/registration'))
+LOGIN_REDIRECT_URL="/"
+LOGIN_URL="/accounts/login/"
+MEDIA_URL="/media/"
+MDEIA_ROOT=os.path.join(BASE_DIR,"SocialConnect/media")
+LOGIN_EXEMPT_URLS=(r'^accounts/logout/$',r'^accounts/registration/$')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 EMAIL_HOST='localhost'
